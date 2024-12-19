@@ -10,28 +10,42 @@
             <table class="table">
                 <thead>
                     <tr>
+                        @Html.Hidden("PatientId")
                         <th scope="col">Hasta Adı</th>
                         <th scope="col">Hasta Soyadı</th>
+                        <th scope="col">TC</th>
                         <th scope="col">Hastalık Adı</th>
                         <th scope="col">Semptomlar</th>
-                        <th scope="col">Hasta Yakını</th>
                         <th scope="col">Hastalık Durumu</th>
                         <th scope="col">Hastalık Başlama Tarihi</th>
                         <th scope="col">Hastalık Bitiş Tarihi</th>
                     </tr>
                 </thead>
                 <tbody>
-                 @foreach (var item in Model)
+                    @foreach (var item in Model)
                     {
                         <tr>
                             <td>@item.Name</td>
                             <td>@item.Lastname</td>
+                            <td>@item.NationalIdentity</td>
                             <td>@item.IllnessName</td>
                             <td>@item.Symptoms</td>
-                            <td>@item.PatientRelatives</td>
                             <td>@item.DiseaseStatus</td>
                             <td>@item.PatientStartDate</td>
-                            <td>@item.PatientEndDate</td>
+                            @if (item.PatientEndDate != null)
+                            {
+                                <td>
+                                    @item.PatientEndDate
+                                </td>
+                            }
+                            else
+                            {
+                                <td>  ∞ </td>
+                            }
+
+
+                            <td><a asp-action="Update" asp-controller="Patient" asp-route-id="@item.PatientId" class="btn btn-outline-info"> Hasta Güncelle</a></td>
+                            <td><button data-id="@item.PatientId" class="btn btn-outline-danger"> Hasta Sil</button></td>
                         </tr>
                     }
                 </tbody>
@@ -39,3 +53,57 @@
         </div>
     </div>
 </div>
+
+
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Hasta Sil</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                <p id="deleteMessage">Bu hastayı silmek istediğinize emin misiniz?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                <button id="confirmDeleteButton" type="button" class="btn btn-danger">Sil</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        let selectedPatientId;
+
+        // Hasta sil butonuna tıklandığında modal açılır
+        $(".btn-outline-danger").on("click", function (e) {
+            e.preventDefault();
+            selectedPatientId = $(this).attr("data-id");
+            $("#deleteMessage").text(`Bu hastayı silmek istediğinize emin misiniz?`);
+            $("#deleteModal").modal("show");
+        });
+
+        // Modal içerisindeki "Sil" butonuna tıklandığında silme işlemi yapılır
+        $("#confirmDeleteButton").on("click", function () {
+            $.ajax({
+                url: `/Patient/Delete/${selectedPatientId}`,
+                type: "Delete",
+                headers: {
+                    "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+                },
+                success: function (response) {
+                    $(`button[asp-route-id='${selectedPatientId}']`).closest("tr").remove();
+                    $("#deleteModal").modal("hide");
+                    // Başarılıysa sayfayı yeniden yükleyin veya satırı kaldırın
+                    location.reload();
+                },
+                error: function () {
+                    alert("Silme işlemi sırasında bir hata oluştu.");
+                }
+            });
+        });
+    </script>
+}

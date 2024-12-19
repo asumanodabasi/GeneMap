@@ -26,8 +26,42 @@ namespace GeneMap.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(PatientDto patientDto, CancellationToken cancellationToken)
         {
-            var result=await _patientRepo.Add(patientDto, cancellationToken);
+            ModelState.Remove("Id");
+            if(!ModelState.IsValid)
+            {
+                return View(nameof(Add),patientDto);
+            }
+            await _patientRepo.Add(patientDto, cancellationToken);
+            return RedirectToAction("Index");
+        }
+
+        
+        public async Task<IActionResult> Update(int id,CancellationToken cancellationToken)
+        {
+            var result = await _patientRepo.GetById(id,cancellationToken);
             return View(result);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(int id,PatientDto patientDto,CancellationToken cancellationToken)
+        {
+            var result=await _patientRepo.Update(id, patientDto, cancellationToken);
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("","Hasta güncellenemedi");
+            }
+            return RedirectToAction("Index");  
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id,CancellationToken cancellationToken)
+        {
+            var deleted=await _patientRepo.Delete(id, cancellationToken);
+            if (deleted == null)
+            {
+                ModelState.AddModelError("", "Hasta silinemedi");
+            }
+            return RedirectToAction("Index");
         }
     }
 }

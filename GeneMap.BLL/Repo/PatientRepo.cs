@@ -34,21 +34,57 @@ namespace GeneMap.BLL.Repo
                 PatientRelatives = patientDto.PatientRelatives
             };
             
-            var result = _patientDataContext.Patients.Add(patient);
+                 _patientDataContext.Patients.Add(patient);
             if (await _patientDataContext.SaveChangesAsync(cancellation) > 0)
             {
                 return patientDto;
             }
             
             
+            return null;
+        }
+
+        public async Task<PatientDto> Update(int id,PatientDto patientDto, CancellationToken cancellationToken)
+        {
+            var result=_patientDataContext.Patients.FirstOrDefault(x=>x.PatientId==id);
+            if (result != null)
+            {
+                result.Symptoms= patientDto.Symptoms;
+                result.PatientRelatives = patientDto.PatientRelatives;
+                result.DiseaseStatus= patientDto.DiseaseStatus;
+                result.IllnessName= patientDto.IllnessName;
+                
+                _patientDataContext.Patients.Update(result);
+                await _patientDataContext.SaveChangesAsync(cancellationToken);
+            }
             return patientDto;
         }
 
+        public async Task<PatientDto> GetById(int id,CancellationToken cancellationToken)
+        {
+            var result = await _patientDataContext.Patients.FindAsync(id);
+            var patientDto = new PatientDto
+            {
+                DiseaseStatus = result.DiseaseStatus,
+                IllnessName = result.IllnessName,
+                Lastname = result.Lastname,
+                Name = result.Name,
+                NationalIdentity = result.NationalIdentity,
+                PatientEndDate = result.PatientEndDate,
+                PatientRelatives = result.PatientRelatives,
+                PatientStartDate = result.PatientStartDate,
+                Symptoms = result.Symptoms,
+                PatientId = result.PatientId
+            };
+            return  patientDto;
+          
+        }
 
         public async Task<List<PatientDto>> List(CancellationToken cancellationToken)
         {
             var patient = await _patientDataContext.Patients.Select(x => new PatientDto
             {
+                PatientId = x.PatientId,
                 Name = x.Name,
                 DiseaseStatus = x.DiseaseStatus,
                 IllnessName = x.IllnessName,
@@ -64,13 +100,13 @@ namespace GeneMap.BLL.Repo
 
         public async Task<int> Delete(int id,CancellationToken cancellationToken)
         {
-            var result=await _patientDataContext.Patients.Where(x=>x.PatientId== id).ToListAsync(cancellationToken);
-            if(result.Count>0)
+            var result = await _patientDataContext.Patients.FindAsync(id);
+            if(result!=null)
             {
                 _patientDataContext.Remove(result);
                await _patientDataContext.SaveChangesAsync(cancellationToken);
             }
-            return 0;
+            return id;
         }
 
 

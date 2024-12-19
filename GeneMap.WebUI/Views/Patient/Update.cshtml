@@ -1,0 +1,41 @@
+﻿@using GeneMap.BLL.Data.Dto
+@model PatientDto
+
+
+<div calss="grid">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Hasta Düzenle</div>
+        </div>
+
+        <div class="form-control">
+            <form asp-action="Update" asp-controller="Patient" method="post">
+                @Html.AntiForgeryToken()
+                @Html.Hidden("PatientId")               
+                <div class="mb-3">
+                    <label asp-for="@Model.IllnessName" class="form-lamel">Hastalık Adı</label>
+                    <input class="form-control" asp-for="@Model.IllnessName" type="text" placeholder="Hastalık Adı" aria-label="default input example">
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Symptoms" class="form-label">Semptomlar</label>
+                    <input class="form-control" asp-for="@Model.Symptoms" type="text" placeholder="Semptomlar" aria-label="default input example">
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.PatientRelatives" class="form-label">Hasta Yakınları</label>
+                    <input class="form-control" asp-for="@Model.PatientRelatives" type="text" placeholder="Hasta Yakınları" aria-label="default input example">
+                </div>
+
+                <div class="form-check">
+                    <label asp-for="@Model.DiseaseStatus" class="form-label">Hastalık Durumu Devam Ediyor Mu</label>
+                    <input class="form-check-input" type="checkbox" asp-for="@Model.DiseaseStatus" placeholder="Hastalık Durumu">
+                </div>
+            
+            
+                <div class="float-end text-white p-2">
+                    <button type="submit" class="btn btn-outline-info">Hasta Kaydet</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
