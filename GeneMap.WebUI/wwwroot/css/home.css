@@ -1,0 +1,36 @@
+﻿/*body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.section {
+    height: 100vh;*/ /* Tam ekran boyutu */
+    /*display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;*/ /* Parallax etkisi için */
+/*}
+
+.section-1 {
+    background-image: url('/images/resim1.jpg');
+}
+
+.section-2 {
+    background-image: url('/images/resim2.jpg');
+}
+
+.section-3 {
+    background-image: url('/images/resim3.webp');
+}
+
+
+.content {
+    background: rgba(0, 0, 0, 0.5);*/ /* Yazıların okunabilirliği için yarı saydam arka plan */
+    /*padding: 20px;
+    border-radius: 8px;
+}*/

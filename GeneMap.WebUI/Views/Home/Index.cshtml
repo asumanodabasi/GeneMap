@@ -1,8 +1,45 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@* <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+    <title>GeneMap</title>
+    </head>
+
+    <body>
+    <div >
+        <div >
+            Welcome to Our Hospital
+        </div>
+    </div>
+
+
+    </body>
+    </html>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+@section scripts {
+    <script>
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top >= 0 && rect.top < window.innerHeight) {
+                    section.style.opacity = 1; // Görünürlük arttır
+                } else {
+                    section.style.opacity = 0.5; // Görünürlük azalt
+                }
+            });
+        });
+
+    </script>
+} *@

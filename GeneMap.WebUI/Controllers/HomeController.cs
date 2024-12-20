@@ -1,9 +1,11 @@
 using GeneMap.WebUI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace GeneMap.WebUI.Controllers
 {
+    //[Authorize] //denemee
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
