@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GeneMap.WebUI.Controllers
 {
-    public class RoleController(RoleManager<AppRole> roleManager) : Controller
+    [Route("api/[controller]/[action]")]
+    [ApiController]
+    public class RoleController(RoleManager<AppRole> roleManager) : ControllerBase
     {
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Create(string name,CancellationToken cancellation)
         {
             AppRole appRole = new()

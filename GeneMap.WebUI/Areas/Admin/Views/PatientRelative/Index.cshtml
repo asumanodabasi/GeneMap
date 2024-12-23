@@ -1,0 +1,39 @@
+﻿@using GeneMap.BLL.Data.Dto
+@model List<PatientRelativeDto>;
+
+
+
+
+div class="grid">
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">Hastaları Listele</div>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    @* @Html.Hidden("PatientId") *@
+                    <th scope="col">Hasta Yakını Adı</th>
+                    <th scope="col">Hasta Yakını Soyadı</th>
+                    <th scope="col">Hasta Yakınlık Derecesi</th>
+                    <th scope="col">Hastalık Adı</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Lastname</td>
+                         <td>@item.Degree</td>
+                     
+
+                     </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+

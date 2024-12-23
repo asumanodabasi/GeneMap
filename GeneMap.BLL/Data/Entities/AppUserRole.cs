@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace GeneMap.BLL.Data.Entities
 {
-    public class AppUserRole
+    public class AppUserRole: IdentityUserRole<Guid>
     {
-        public Guid RoleId {  get; set; }   
-        public Guid UserId {  get; set; }
+        //public Guid RoleId {  get; set; }   
+        //public Guid UserId {  get; set; }
     }
 }

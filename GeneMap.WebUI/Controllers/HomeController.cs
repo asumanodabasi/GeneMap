@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace GeneMap.WebUI.Controllers
 {
-    //[Authorize] //denemee
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

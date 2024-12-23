@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using GeneMap.BLL.Data.Dto
+@model LoginDto
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -6,6 +9,8 @@
 
 </head>
 <body>
+
+    
     <div class="containerhome">
         <div class="dna">
             <div class="item">
@@ -231,5 +236,37 @@
             </filter>
         </svg>
     </div>
+    
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+<div class="col-md-4 ms-auto me-auto" style="padding-top:50px;">
+    <div class="card" >
+        <div class="card-header">
+            <h3 style="font-family:Arial,sans-serif;">Login</h3>
+        </div>
+        <div class="card-body">
+            <form asp-action="Login" asp-controller="Auth" method="post">
+                <div class="mb-3">
+                    <label asp-for="@Model.UserNameOrEmail" class="form-label">Kullanıcı Adı veya Email</label>
+                    <input class="form-control" asp-for="@Model.UserNameOrEmail" />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Password" class="form-label">Şifre</label>
+                    <input class="form-control" type="password" asp-for="@Model.Password" />
+                </div>
+                <div class="float-end text-white p-2">
+                    <button type="submit" class="btn btn-outline-success">Giriş Yap</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

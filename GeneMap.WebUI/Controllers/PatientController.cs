@@ -1,9 +1,11 @@
 ﻿using GeneMap.BLL.Data.Dto;
 using GeneMap.BLL.Repo;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GeneMap.WebUI.Controllers
 {
+    [Authorize]
     public class PatientController : Controller
     {
         private readonly PatientRepo _patientRepo;

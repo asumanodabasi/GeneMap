@@ -1,0 +1,38 @@
+﻿@using GeneMap.BLL.Data.Dto
+
+@model DiagnosisDto
+
+
+
+
+<div calss="grid">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Teşhis</div>
+        </div>
+
+        <div class="form-control">
+            <form asp-action="Add" asp-controller="Diagnosis" method="post">
+                <div class="mb-3">
+                    <label asp-for="@Model.Name" class="form-label"> Teşhis Adı</label>
+                    <input class="form-control" asp-for="@Model.Name" type="text" placeholder="Teşhis Adı" aria-label="default input example">
+                </div>
+                
+                <div class="mb-3">
+                    <label asp-for="@Model.Description" class="form-lamel">Açıklama</label>
+                    <textarea class="form-control" asp-for="@Model.Description" type="text" placeholder="Açıklama" aria-label="default input example"></textarea>
+                </div>
+             
+                <div class="mb-3">
+                    <label asp-for="@Model.DiagnosisDate" class="form-label">Teşhis Tarihi</label>
+                    <input class="form-control" asp-for="@Model.DiagnosisDate" type="date" placeholder="Teşhis Tarihi">
+                </div>
+
+                <div class="float-end text-white p-2">
+                    <button type="submit" class="btn btn-primary">Teşhis Koy</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

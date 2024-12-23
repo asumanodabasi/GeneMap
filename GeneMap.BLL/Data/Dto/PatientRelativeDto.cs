@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GeneMap.BLL.Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,6 @@ namespace GeneMap.BLL.Data.Dto
         public int Degree { get; set; }
         public string Name { get; set; }
         public string Lastname { get; set; }
-        public ICollection<PatientDto> Patients { get; set; } = new List<PatientDto>();
+        public ICollection<Patient> Patients { get; set; } = new List<Patient>();
     }
 }

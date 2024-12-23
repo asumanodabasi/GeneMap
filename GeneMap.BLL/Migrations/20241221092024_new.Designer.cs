@@ -4,6 +4,7 @@ using GeneMap.BLL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeneMap.BLL.Migrations
 {
     [DbContext(typeof(PatientDataContext))]
-    partial class PatientDataContextModelSnapshot : ModelSnapshot
+    [Migration("20241221092024_new")]
+    partial class @new
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -255,21 +258,6 @@ namespace GeneMap.BLL.Migrations
                     b.ToTable("Patients");
                 });
 
-            modelBuilder.Entity("GeneMap.BLL.Data.Entities.PatientPatientRelative", b =>
-                {
-                    b.Property<int>("PatientId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PatientRelativeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PatientId", "PatientRelativeId");
-
-                    b.HasIndex("PatientRelativeId");
-
-                    b.ToTable("PatientPatientRelatives");
-                });
-
             modelBuilder.Entity("GeneMap.BLL.Data.Entities.PatientRelative", b =>
                 {
                     b.Property<int>("PatientRelativeId")
@@ -292,28 +280,6 @@ namespace GeneMap.BLL.Migrations
                     b.HasKey("PatientRelativeId");
 
                     b.ToTable("PatientRelatives");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UserClaims");
                 });
 
             modelBuilder.Entity("PatientPatientRelative", b =>
@@ -363,25 +329,6 @@ namespace GeneMap.BLL.Migrations
                     b.Navigation("Ilness");
 
                     b.Navigation("Patient");
-                });
-
-            modelBuilder.Entity("GeneMap.BLL.Data.Entities.PatientPatientRelative", b =>
-                {
-                    b.HasOne("GeneMap.BLL.Data.Entities.Patient", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GeneMap.BLL.Data.Entities.PatientRelative", "PatientRelative")
-                        .WithMany()
-                        .HasForeignKey("PatientRelativeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Patient");
-
-                    b.Navigation("PatientRelative");
                 });
 
             modelBuilder.Entity("PatientPatientRelative", b =>
