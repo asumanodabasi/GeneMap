@@ -1,0 +1,87 @@
+﻿@using GeneMap.BLL.Data.Dto
+@model PatientDto
+
+<div class="container">
+    <div class="row mb-2">
+        <!-- Hasta Bilgileri Div -->
+        <div class="col-md-8">
+            <div class="card mb-2">
+                <div class="card-header">
+                    <div class="card-title">Hasta Bilgileri</div>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                @Html.Hidden("PatientId")
+                                <th scope="col">Hasta Adı</th>
+                                <th scope="col">Hasta Soyadı</th>
+                                <th scope="col">TC</th>
+                                <th scope="col">Şikayetleri</th>
+                                <th scope="col">Semptomlar</th>
+                                <th scope="col">Hastalık Durumu</th>
+                                <th scope="col">Hastalık Başlama Tarihi</th>
+                                <th scope="col">Hastalık Bitiş Tarihi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@Model.Name</td>
+                                <td>@Model.Lastname</td>
+                                <td>@Model.NationalIdentity</td>
+                                <td>@Model.Complaints</td>
+                                <td>@Model.Symptoms</td>
+                                <td>@Model.DiseaseStatus</td>
+                                <td>@Model.PatientStartDate</td>
+                                @if (Model.PatientEndDate != null)
+                                {
+                                    <td>
+                                        @Model.PatientEndDate
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>∞</td>
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+       
+        <!-- Diagnosis Div -->
+        <div class="col-md-4">
+            <div id="diagnosis">
+
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div id="relatives" class="card mb-2" style="margin-top:-170px;">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            // Hastalık seçeneklerini yükle
+            $("#diagnosis").load('@Url.Action("Add", "Diagnosis")', function (response, status, xhr) {
+                if (status === "error") {
+                    alert("Hastalıklar yüklenirken bir hata oluştu: " + xhr.status + " " + xhr.statusText);
+                }
+            });
+            $("#relatives").load('@Url.Action("Index", "PatientRelative", new { area = "Admin",patientId = Model.PatientId })', function (response, status, xhr) {
+                if (status === "error") {
+                    alert("Hasta Yakınları yüklenirken bir hata oluştu: " + xhr.status + " " + xhr.statusText);
+                }
+            });
+        });
+
+
+
+    </script>
+}

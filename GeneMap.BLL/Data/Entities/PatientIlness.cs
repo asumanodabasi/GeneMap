@@ -7,16 +7,17 @@ using System.Threading.Tasks;
 
 namespace GeneMap.BLL.Data.Entities
 {
-    public class PatientPatientRelative
+    public class PatientIlness
     {
+        public int IlnessId { get; set; }
         public int PatientId { get; set; }
-        public string Relation { get; set; } // Örn: Anne, Baba, Kardeş vb.
-        public int PatientRelativeId { get; set; }
 
         [ForeignKey(nameof(PatientId))]
         public Patient Patient { get; set; }
 
-        [ForeignKey(nameof(PatientRelativeId))]
-        public PatientRelative PatientRelative { get; set; }
+        [ForeignKey(nameof(IlnessId))]
+        public Ilness Ilness { get; set; }
+
+
     }
 }

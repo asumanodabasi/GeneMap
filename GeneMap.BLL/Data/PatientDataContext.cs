@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 namespace GeneMap.BLL.Data
 {
     public class PatientDataContext : IdentityDbContext<AppUser, AppRole, Guid, IdentityUserClaim<Guid>,
@@ -14,6 +15,7 @@ namespace GeneMap.BLL.Data
         {
             builder.Entity<AppUserRole>().HasKey(x => new { x.RoleId,x.UserId});
             builder.Entity<PatientPatientRelative>().HasKey(x=> new {x.PatientId,x.PatientRelativeId});
+            builder.Entity<PatientIlness>().HasKey(x=>new {x.PatientId,x.IlnessId});
 
             builder.Ignore<IdentityUserLogin<Guid>>();
             builder.Ignore<IdentityUserToken<Guid>>();
@@ -25,6 +27,7 @@ namespace GeneMap.BLL.Data
         public DbSet<Diagnosis> Diagnosiss { get; set; }
         public DbSet<PatientPatientRelative> PatientPatientRelatives { get; set; }
         public DbSet<PatientRelative> PatientRelatives { get; set; }
+        public DbSet<PatientIlness> PatientIlnesses { get; set; }
 
       
 

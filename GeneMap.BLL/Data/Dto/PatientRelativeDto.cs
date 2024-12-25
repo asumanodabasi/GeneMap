@@ -13,6 +13,8 @@ namespace GeneMap.BLL.Data.Dto
         public int Degree { get; set; }
         public string Name { get; set; }
         public string Lastname { get; set; }
-        public ICollection<Patient> Patients { get; set; } = new List<Patient>();
+        public int IllnessId { get; set; }
+        public Ilness Ilness { get; set; }
+        public ICollection<PatientPatientRelative> Patients { get; set; } = new List<PatientPatientRelative>();
     }
 }

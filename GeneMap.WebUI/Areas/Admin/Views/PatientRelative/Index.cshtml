@@ -1,39 +1,66 @@
 ﻿@using GeneMap.BLL.Data.Dto
-@model List<PatientRelativeDto>;
+@using GeneMap.BLL.Data.Entities
+@model PatientDto
 
 
 
 
-div class="grid">
-<div class="card">
-    <div class="card-header">
-        <div class="card-title">Hastaları Listele</div>
-    </div>
-    <div class="card-body">
-        <table class="table">
-            <thead>
-                <tr>
-                    @* @Html.Hidden("PatientId") *@
-                    <th scope="col">Hasta Yakını Adı</th>
-                    <th scope="col">Hasta Yakını Soyadı</th>
-                    <th scope="col">Hasta Yakınlık Derecesi</th>
-                    <th scope="col">Hastalık Adı</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
+<div class="grid">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Hasta Yakınları Listele</div>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>@item.Name</td>
-                        <td>@item.Lastname</td>
-                         <td>@item.Degree</td>
-                     
+                        @Html.Hidden("patientId")
 
-                     </tr>
-                }
-            </tbody>
-        </table>
+                        <th scope="col">Hasta Yakını Adı</th>
+                        <th scope="col">Hasta Yakını Soyadı</th>
+                        <th scope="col">Hasta Yakınlık Derecesi</th>
+                        <th scope="col">Hastalık Adı</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+
+
+                    @foreach (var item in Model.PatientRelative)
+                    {
+                        <tr>
+
+
+                            <td>@item.PatientRelative.Name</td>
+                            <td>@item.PatientRelative.Lastname</td>
+                            <td>
+                                @item.PatientRelative.Degree (@foreach (var relation in item.PatientRelative.PatientPatientRelative)
+                                {
+                                    @relation.Relation
+                                })
+                            </td>
+                           
+                            <td>
+                                @foreach (var ilness in Model.Ilness)
+                                {
+                                    @if (item.PatientRelative.IllnessId == ilness.IlnessId)
+                                    {
+                                        @ilness.IlnessName  @ilness.DiseaseStage
+                                        break;
+                                    }
+                                   
+                                }
+                            </td>
+                        </tr>
+                    }
+
+                   
+                       
+                    
+
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 </div>
 

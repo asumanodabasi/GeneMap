@@ -7,9 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using GeneMap.BLL.Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using GeneMap.BLL.Migrations;
+using System.Threading;
 
 namespace GeneMap.BLL.Repo
-{   
+{
     public class PatientRelativeRepo
     {
         private readonly PatientDataContext _patientDataContext;
@@ -21,12 +23,12 @@ namespace GeneMap.BLL.Repo
 
         public async Task<PatientRelativeDto> Add(PatientRelativeDto patientRelativeDto, CancellationToken cancellation)
         {
-            var patientRelative = new PatientRelative
+            var patientRelative = new Data.Entities.PatientRelative
             {
                 Name = patientRelativeDto.Name,
                 Lastname = patientRelativeDto.Lastname,
                 Degree = patientRelativeDto.Degree,
-                Patients=patientRelativeDto.Patients,
+                PatientPatientRelative = patientRelativeDto.Patients,
             };
 
             _patientDataContext.PatientRelatives.Add(patientRelative);
@@ -45,23 +47,24 @@ namespace GeneMap.BLL.Repo
             {
                 Lastname = result.Lastname,
                 Name = result.Name,
-                Degree= result.Degree,
-                Patients= result.Patients,
+                Degree = result.Degree,
+                Patients = result.PatientPatientRelative,
                 PatientRelativeId = result.PatientRelativeId
             };
             return patientRelativeDto;
 
         }
 
+     
         public async Task<List<PatientRelativeDto>> List(CancellationToken cancellationToken)
         {
             var patientRelative = await _patientDataContext.PatientRelatives.Select(x => new PatientRelativeDto
             {
                 Name = x.Name,
-               PatientRelativeId= x.PatientRelativeId,
+                PatientRelativeId = x.PatientRelativeId,
                 Lastname = x.Lastname,
-               Degree = x.Degree,
-               Patients= x.Patients,
+                Degree = x.Degree,
+                Patients = x.PatientPatientRelative
             }).ToListAsync(cancellationToken);
             return patientRelative;
         }

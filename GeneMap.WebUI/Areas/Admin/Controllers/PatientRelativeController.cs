@@ -5,22 +5,26 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GeneMap.WebUI.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    // [Authorize]
+    [Area("Admin")]
     public class PatientRelativeController : Controller
     {
         private readonly PatientRelativeRepo _patientRelativeRepo;
-
-        public PatientRelativeController(PatientRelativeRepo patientRelativeRepo)
+        private readonly PatientRepo _patientRepo;
+        public PatientRelativeController(PatientRelativeRepo patientRelativeRepo,PatientRepo patientRepo)
         {
             _patientRelativeRepo = patientRelativeRepo;
+            _patientRepo = patientRepo;
         }
 
-        public IActionResult Index(CancellationToken cancellationToken)
+        [HttpGet]
+        public async Task<IActionResult> Index(int patientId,CancellationToken cancellationToken)
         {
-            var result = _patientRelativeRepo.List(cancellationToken);
-            return View(result);
+            var result = await _patientRepo.GetRelatives(patientId, cancellationToken);
+            return PartialView(result);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Add(CancellationToken cancellationToken)
         {
             return View();
@@ -38,7 +42,7 @@ namespace GeneMap.WebUI.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(int id, CancellationToken cancellationToken)
         {
             var result = await _patientRelativeRepo.GetById(id, cancellationToken);
@@ -55,7 +59,7 @@ namespace GeneMap.WebUI.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
         {

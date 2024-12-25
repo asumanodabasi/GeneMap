@@ -242,30 +242,31 @@
 
 
 <div class="col-md-4 ms-auto me-auto" style="padding-top:20px;">
-    <div class="card">
+    
+    <div class="box" style="height:560px;">
         <div class="card-header">
-            <h3 style="font-family:Arial,sans-serif;">Register</h3>
+            <h3 style="font-family:Arial,sans-serif; color:white;">Register</h3>
         </div>
         <div class="card-body">
             <form asp-action="Register" asp-controller="Auth" method="post">
                 <div class="mb-3">
-                    <label asp-for="@Model.UserName" class="form-label">Kullanıcı Adı</label>
+                    <label asp-for="@Model.UserName" class="form-label" style="color:white;">Kullanıcı Adı</label>
                     <input class="form-control" asp-for="@Model.UserName" / >
                 </div>
             <div class="mb-3">
-                <label asp-for="@Model.Email" class="form-label">E-Posta Adresi</label>
+                    <label asp-for="@Model.Email" class="form-label" style="color:white;">E-Posta Adresi</label>
                 <input class="form-control" type="email" asp-for="@Model.Email" />
             </div>
                 <div class="mb-3">
-                    <label asp-for="@Model.FirstName" class="form-label">İsim</label>
+                    <label asp-for="@Model.FirstName" class="form-label" style="color:white;">İsim</label>
                     <input class="form-control" asp-for="@Model.FirstName" / >
                 </div>
             <div class="mb-3">
-                <label asp-for="@Model.LastName" class="form-label">Soyisim</label>
+                    <label asp-for="@Model.LastName" class="form-label" style="color:white;">Soyisim</label>
                 <input class="form-control" asp-for="@Model.LastName" />
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.Password" class="form-label">Şifre</label>
+                    <label asp-for="@Model.Password" class="form-label" style="color:white;">Şifre</label>
                 <input class="form-control" type="password" asp-for="@Model.Password" />
             </div>
             <div class="float-end text-white p-2">

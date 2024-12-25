@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GeneMap.WebUI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class PatientController : Controller
     {
         private readonly PatientRepo _patientRepo;
@@ -28,13 +28,15 @@ namespace GeneMap.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(PatientDto patientDto, CancellationToken cancellationToken)
         {
-            ModelState.Remove("Id");
+          //  ModelState.Remove("Id");
             if(!ModelState.IsValid)
             {
                 return View(nameof(Add),patientDto);
             }
-            await _patientRepo.Add(patientDto, cancellationToken);
-            return RedirectToAction("Index");
+            var result=await _patientRepo.Add(patientDto, cancellationToken);
+         
+               
+            return Redirect("/Patient/Index");
         }
 
         
@@ -64,6 +66,13 @@ namespace GeneMap.WebUI.Controllers
                 ModelState.AddModelError("", "Hasta silinemedi");
             }
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetByIdPatient(int id,CancellationToken cancellationToken)
+        {
+            var result = await _patientRepo.GetById(id, cancellationToken);
+            return View(result);
         }
     }
 }

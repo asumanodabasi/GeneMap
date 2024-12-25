@@ -1,0 +1,26 @@
+﻿@using GeneMap.BLL.Data.Dto
+@model List<IlnessDto>
+
+
+
+<select class="form-control">
+    <option>Hastalık seçiniz</option>
+    @foreach (var item in Model)
+    {
+        <option value="@item.IlnessId">@item.IlnessName</option>
+    }
+</select>
+
+
+<div class="pt-3">
+    Hastalık durumu seçiniz
+
+    <select class="form-control">
+        <option>Hastalık durumu seçiniz</option>
+        @foreach (var item in Model)
+        {
+
+            <option value="@item.IlnessId">@item.DiseaseStage</option>
+        }
+    </select>
+</div>

@@ -7,8 +7,10 @@
     <title>GeneMap</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="~/GeneMap.WebUI.styles.css" asp-append-version="true" />
-</head>
+ </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
@@ -55,6 +57,25 @@
                             </li>
                         </ul>
                     }
+                    <div class="dropdown" style="margin-right:70px;">
+                        <a type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fas fa-globe"></i> 
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="tr-Tr" class="dropdown-item">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg" alt="Türkçe" class="me-2" style="width: 20px; height: 15px; border-radius: 3px;">
+                                    Türkçe
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-Us" class="dropdown-item">
+                                    <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="English" class="me-2" style="width: 20px; height: 15px; border-radius: 3px;">
+                                    English
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>

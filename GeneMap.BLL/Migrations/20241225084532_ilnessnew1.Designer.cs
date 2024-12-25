@@ -4,6 +4,7 @@ using GeneMap.BLL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeneMap.BLL.Migrations
 {
     [DbContext(typeof(PatientDataContext))]
-    partial class PatientDataContextModelSnapshot : ModelSnapshot
+    [Migration("20241225084532_ilnessnew1")]
+    partial class ilnessnew1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -209,12 +212,7 @@ namespace GeneMap.BLL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PatientId")
-                        .HasColumnType("int");
-
                     b.HasKey("IlnessId");
-
-                    b.HasIndex("PatientId");
 
                     b.ToTable("Ilnesses");
                 });
@@ -377,13 +375,6 @@ namespace GeneMap.BLL.Migrations
                     b.Navigation("Patient");
                 });
 
-            modelBuilder.Entity("GeneMap.BLL.Data.Entities.Ilness", b =>
-                {
-                    b.HasOne("GeneMap.BLL.Data.Entities.Patient", null)
-                        .WithMany("Ilnesses")
-                        .HasForeignKey("PatientId");
-                });
-
             modelBuilder.Entity("GeneMap.BLL.Data.Entities.PatientIlness", b =>
                 {
                     b.HasOne("GeneMap.BLL.Data.Entities.Ilness", "Ilness")
@@ -393,7 +384,7 @@ namespace GeneMap.BLL.Migrations
                         .IsRequired();
 
                     b.HasOne("GeneMap.BLL.Data.Entities.Patient", "Patient")
-                        .WithMany()
+                        .WithMany("Ilnesses")
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

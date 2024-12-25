@@ -32,9 +32,9 @@ namespace GeneMap.BLL.Repo
                 Description = diagnosisDto.Description,
                 DiagnosisDate = diagnosisDto.DiagnosisDate,
                 PatientId = diagnosisDto.PatientId,
-                IlnessId = diagnosisDto.IlnessId
+                IlnessId = diagnosisDto.IlnessId,
             };
-
+            
             _patientDataContext.Diagnosiss.Add(diagnosis);
             if (await _patientDataContext.SaveChangesAsync(cancellation) > 0)
             {
@@ -45,6 +45,15 @@ namespace GeneMap.BLL.Repo
             return null;
         }
 
+        //public async Task<PatientDto> PutDiagnosis(int patientId,int ilnessId,CancellationToken cancellationToken)
+        //{
+        //    var patient =await _patientDataContext.Patients.FirstOrDefaultAsync(x => x.PatientId == patientId);
+        //    var ilness =await _patientDataContext.Ilnesses.FirstOrDefaultAsync(x => x.IlnessId == ilnessId);
+        //    if(patient !=null & ilness != null)
+        //    {
+        //        var patiIlness = await _patientDataContext.pa;
+        //    }
+        //}
         public async Task<DiagnosisDto> Update(int id, DiagnosisDto diagnosisDto, CancellationToken cancellationToken)
         {
             var result = _patientDataContext.Diagnosiss.FirstOrDefault(x => x.DiagnosisId == id);
@@ -103,6 +112,7 @@ namespace GeneMap.BLL.Repo
             return id;
         }
 
+        
 
     }
 }

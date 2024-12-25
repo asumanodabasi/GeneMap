@@ -18,5 +18,12 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  margin-bottom: 30px;
+}
+.box {
+    height: 320px;
+    border-radius: 20px;
+    border: 2px solid white;
+    z-index: 1;
+    background-color: rgb(4,75,97);
 }

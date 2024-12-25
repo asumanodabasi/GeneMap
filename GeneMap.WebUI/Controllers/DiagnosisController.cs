@@ -7,10 +7,11 @@ namespace GeneMap.WebUI.Controllers
     public class DiagnosisController : Controller
     {
         private readonly DiagnosisRepo _diagnosisRepo;
-
-        public DiagnosisController(DiagnosisRepo diagnosisRepo)
+        private readonly IlnessRepo _ilnessRepo;
+        public DiagnosisController(DiagnosisRepo diagnosisRepo,IlnessRepo ilnessRepo)
         {
             _diagnosisRepo = diagnosisRepo;
+            _ilnessRepo = ilnessRepo;
         }
 
         public IActionResult Index(CancellationToken cancellationToken)
@@ -21,7 +22,7 @@ namespace GeneMap.WebUI.Controllers
 
         public async Task<IActionResult> Add(CancellationToken cancellationToken)
         {
-            return View();
+            return PartialView();
         }
 
         [HttpPost]
@@ -36,7 +37,11 @@ namespace GeneMap.WebUI.Controllers
             return RedirectToAction("Index");
         }
 
-
+        public async Task<IActionResult> PutDiagnosis(int patinetId,int ilnessId,CancellationToken cancellationToken)
+        {
+            ///var result = await _diagnosisRepo.PutDiagnosis(patinetId,ilnessId,cancellationToken);
+            return View();
+        }
         public async Task<IActionResult> Update(int id, CancellationToken cancellationToken)
         {
             var result = await _diagnosisRepo.GetById(id, cancellationToken);
@@ -65,5 +70,11 @@ namespace GeneMap.WebUI.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetIlness(CancellationToken cancellationToken)
+        {
+            var result=await _ilnessRepo.List(cancellationToken);
+            return PartialView(result);
+        }
     }
 }

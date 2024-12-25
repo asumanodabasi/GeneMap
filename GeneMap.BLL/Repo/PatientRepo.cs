@@ -19,29 +19,65 @@ namespace GeneMap.BLL.Repo
             _patientDataContext = patientDataContext;
         }
 
-        public async Task<PatientDto> Add(PatientDto patientDto,CancellationToken cancellation)
+        public async Task<int> Add(PatientDto patientDto,CancellationToken cancellation)
         {
-            var patient = new Patient
+            Patient patient=new()
             {
                 Name = patientDto.Name,
                 DiseaseStatus = patientDto.DiseaseStatus,
-                IllnessName = patientDto.IllnessName,
+                Complaints = patientDto.Complaints,
                 Lastname = patientDto.Lastname,
                 PatientEndDate = patientDto.PatientEndDate,
                 PatientStartDate = patientDto.PatientStartDate,
                 NationalIdentity = patientDto.NationalIdentity,
                 Symptoms = patientDto.Symptoms,
-                PatientRelatives = patientDto.PatientRelatives
             };
             
                  _patientDataContext.Patients.Add(patient);
             if (await _patientDataContext.SaveChangesAsync(cancellation) > 0)
             {
-                return patientDto;
+                return patientDto.PatientId;
             }
+
+
+            return 0;
+        }
+
+       
+        public async Task<PatientDto> GetRelatives(int patientId, CancellationToken cancellationToken)
+        {
+            var result = await _patientDataContext.Patients
+                .Include(x => x.PatientPatientRelative)
+                    .ThenInclude(pr => pr.PatientRelative).Include(x=>x.Ilnesses)
+                .FirstOrDefaultAsync(x => x.PatientId == patientId, cancellationToken);
+
             
-            
-            return null;
+            if (result == null) return null;
+
+            // DTO'ya dönüştürme
+            var patientDto = new PatientDto
+            {
+                PatientId = result.PatientId,
+                NationalIdentity = result.NationalIdentity,
+                Name = result.Name,
+                Lastname = result.Lastname,
+                Complaints = result.Complaints,
+                Symptoms = result.Symptoms,
+                PatientStartDate = result.PatientStartDate,
+                PatientEndDate = result.PatientEndDate,
+                DiseaseStatus = result.DiseaseStatus,
+                Ilness=result.Ilnesses,
+                PatientRelative = result.PatientPatientRelative.Select(pr => new PatientPatientRelative
+                {
+                    PatientId = pr.PatientId,
+                    PatientRelativeId = pr.PatientRelativeId,
+                    Relation = pr.Relation,
+                    PatientRelative=pr.PatientRelative,
+                    Patient =pr.Patient,
+                }).ToList()
+            };
+
+            return patientDto;
         }
 
         public async Task<PatientDto> Update(int id,PatientDto patientDto, CancellationToken cancellationToken)
@@ -50,9 +86,8 @@ namespace GeneMap.BLL.Repo
             if (result != null)
             {
                 result.Symptoms= patientDto.Symptoms;
-                result.PatientRelatives = patientDto.PatientRelatives;
                 result.DiseaseStatus= patientDto.DiseaseStatus;
-                result.IllnessName= patientDto.IllnessName;
+                result.Complaints= patientDto.Complaints;
                 
                 _patientDataContext.Patients.Update(result);
                 await _patientDataContext.SaveChangesAsync(cancellationToken);
@@ -66,12 +101,11 @@ namespace GeneMap.BLL.Repo
             var patientDto = new PatientDto
             {
                 DiseaseStatus = result.DiseaseStatus,
-                IllnessName = result.IllnessName,
+                Complaints = result.Complaints,
                 Lastname = result.Lastname,
                 Name = result.Name,
                 NationalIdentity = result.NationalIdentity,
                 PatientEndDate = result.PatientEndDate,
-                PatientRelatives = result.PatientRelatives,
                 PatientStartDate = result.PatientStartDate,
                 Symptoms = result.Symptoms,
                 PatientId = result.PatientId
@@ -87,12 +121,11 @@ namespace GeneMap.BLL.Repo
                 PatientId = x.PatientId,
                 Name = x.Name,
                 DiseaseStatus = x.DiseaseStatus,
-                IllnessName = x.IllnessName,
+                Complaints=x.Complaints,
                 Lastname = x.Lastname,
                 PatientEndDate = x.PatientEndDate,
                 PatientStartDate = x.PatientStartDate,
                 NationalIdentity = x.NationalIdentity,
-                PatientRelatives = x.PatientRelatives,
                 Symptoms = x.Symptoms
             }).ToListAsync(cancellationToken);
             return patient;
@@ -110,5 +143,6 @@ namespace GeneMap.BLL.Repo
         }
 
 
+      
     }
 }

@@ -66,8 +66,8 @@ namespace GeneMap.BLL.Repo
         {
             var patient = await _patientDataContext.Ilnesses.Select(x => new IlnessDto
             {
+                IlnessName = x.IlnessName,
                 DiseaseStage = x.DiseaseStage,
-                IlnessName = x.IlnessName
             }).ToListAsync(cancellationToken);
             return patient;
         }
