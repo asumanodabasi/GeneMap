@@ -117,7 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Welcome" xml:space="preserve">
-    <value>Hoşgeldinnn</value>
+  <data name="p1" xml:space="preserve">
+    <value>Son yıllarda artan genetik hastalıklar, hastalara konulan doğru ve erken teşhisin önemini her geçen gün daha da artırmaktadır. Sağlık alanındaki gelişmelerle birlikte, teknolojinin hızlı bir şekilde ilerlemesi, sağlık ve teknoloji entegrasyonunu zorunlu hale getirmiştir. Bu bağlamda, teknoloji ve sağlık alanlarını bir araya getirerek, hastalar, doktorlar ve teşhis süreci arasındaki ilişkiye yeni bir bakış açısı kazandırmayı amaçlayan yenilikçi bir platform</value>
+  </data>
+  <data name="Your Welcome" xml:space="preserve">
+    <value>Hoşgeldiniz</value>
   </data>
 </root>

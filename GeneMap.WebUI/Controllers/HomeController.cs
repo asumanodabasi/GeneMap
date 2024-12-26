@@ -3,6 +3,7 @@ using GeneMap.WebUI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 
 namespace GeneMap.WebUI.Controllers
@@ -22,6 +23,7 @@ namespace GeneMap.WebUI.Controllers
         public IActionResult Index()
         {
             ViewBag.Welcome = _language.GetKey("Welcome").Value;
+            ViewBag.p1 = _language.GetKey("p1").Value;
             var current = Thread.CurrentThread.CurrentCulture.Name;
             return View();
         }

@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
 </head>
 <body>
-    <h2 style="color:white;">@_language.GetKey("Welcome").Value</h2>
+    <h2 style="color:white;">@_language.GetKey("Your Welcome").Value</h2>
 
     <div class="containerhome">
         <div class="dna">
@@ -234,7 +234,10 @@
     </div>
 
 
-    <div ></div>
+    <div class="col-md-6 ms-auto" style="color:white; font-size:medium; ">
+        <p class="description">@_language.GetKey("p1").Value
+        </p>
+    </div>
 
 
 </body>
@@ -243,11 +246,11 @@
 
 <style>
 
+
     body {
         margin: 0;
         font-family: Arial, sans-serif;
         overflow-x: hidden;
-       
     }
 
     section {
@@ -261,7 +264,6 @@
         background-attachment: fixed;
         background-position: center;
         transition: background 0.5s ease-in-out;
-   
     }
 
         section::before {

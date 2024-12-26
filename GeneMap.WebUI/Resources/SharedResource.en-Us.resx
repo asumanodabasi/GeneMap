@@ -117,7 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Welcome" xml:space="preserve">
-    <value>Welcome hi</value>
+  <data name="p1" xml:space="preserve">
+    <value>Genetic diseases, which have increased in recent years, increase the importance of accurate and early diagnosis of patients every day. Along with the developments in the field of health, the rapid advancement of technology has made the integration of health and technology mandatory. In this context, an innovative platform that aims to bring together the fields of technology and health and to provide a new perspective on the relationship between patients, doctors and the diagnostic process.</value>
+  </data>
+  <data name="Your Welcome" xml:space="preserve">
+    <value>Your Welcome</value>
   </data>
 </root>
