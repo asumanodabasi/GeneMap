@@ -17,13 +17,6 @@ namespace GeneMap.BLL.Repo
         {
             _patientDataContext = patientDataContext;
         }
-
-        //public async Task<List<PatientDto>> PutDiagnosis()
-        //{
-        //    return 
-        //}
-
-
         public async Task<DiagnosisDto> Add(DiagnosisDto diagnosisDto, CancellationToken cancellation)
         {
             var diagnosis = new Diagnosis
@@ -36,6 +29,12 @@ namespace GeneMap.BLL.Repo
             };
             
             _patientDataContext.Diagnosiss.Add(diagnosis);
+            var info = new PatientIlness
+            {
+                IlnessId = diagnosisDto.IlnessId,
+                PatientId = diagnosisDto.PatientId,
+            };
+            _patientDataContext.PatientIlnesses.Add(info);
             if (await _patientDataContext.SaveChangesAsync(cancellation) > 0)
             {
                 return diagnosisDto;
@@ -45,15 +44,6 @@ namespace GeneMap.BLL.Repo
             return null;
         }
 
-        //public async Task<PatientDto> PutDiagnosis(int patientId,int ilnessId,CancellationToken cancellationToken)
-        //{
-        //    var patient =await _patientDataContext.Patients.FirstOrDefaultAsync(x => x.PatientId == patientId);
-        //    var ilness =await _patientDataContext.Ilnesses.FirstOrDefaultAsync(x => x.IlnessId == ilnessId);
-        //    if(patient !=null & ilness != null)
-        //    {
-        //        var patiIlness = await _patientDataContext.pa;
-        //    }
-        //}
         public async Task<DiagnosisDto> Update(int id, DiagnosisDto diagnosisDto, CancellationToken cancellationToken)
         {
             var result = _patientDataContext.Diagnosiss.FirstOrDefault(x => x.DiagnosisId == id);

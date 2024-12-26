@@ -2,8 +2,10 @@
 @model List<IlnessDto>
 
 
-
-<select class="form-control">
+    @Html.Hidden("ilnessId")
+    @Html.Hidden("PatientId")
+<select name="IlnessId" class="form-control">
+   
     <option>Hastalık seçiniz</option>
     @foreach (var item in Model)
     {
@@ -15,12 +17,11 @@
 <div class="pt-3">
     Hastalık durumu seçiniz
 
-    <select class="form-control">
+    <select name="DiseaseStageId" class="form-control">
         <option>Hastalık durumu seçiniz</option>
         @foreach (var item in Model)
         {
-
-            <option value="@item.IlnessId">@item.DiseaseStage</option>
+            <option value="@item.DiseaseStage">@item.DiseaseStage</option>
         }
     </select>
 </div>

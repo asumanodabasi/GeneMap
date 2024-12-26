@@ -17,7 +17,7 @@ namespace GeneMap.BLL.Data.Dto
         public string Lastname { get; set; }
         public string Complaints { get; set; }
         public int IllnessId { get; set; }
-        public ICollection<Ilness> Ilness { get; set; }
+        public ICollection<Ilness> Ilness { get; set; }= new List<Ilness>();
         public string Symptoms { get; set; }
         public DateOnly? PatientStartDate { get; set; }
         public DateOnly? PatientEndDate { get; set; }

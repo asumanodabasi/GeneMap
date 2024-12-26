@@ -9,6 +9,8 @@ namespace GeneMap.BLL.Data.Entities
         public string Name { get; set; }
         public string Lastname { get; set; }
         public int IllnessId { get; set; }
+        [ForeignKey(nameof(IllnessId))]
+        public Ilness Ilness { get; set; }
         public ICollection<PatientPatientRelative> PatientPatientRelative { get; set; } = new List<PatientPatientRelative>();
     }
 }

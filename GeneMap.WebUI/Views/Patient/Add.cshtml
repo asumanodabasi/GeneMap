@@ -7,10 +7,10 @@
 <div calss="grid">
     <div class="card">
         <div class="card-header">
-            <div class="card-title">Hasta Ekle</div>
+            <div class="card-title" style="color:white;">Hasta Ekle</div>
         </div>
-
-        <div class="form-control">
+        <div class="card-body">
+        <div class="form-control" style="background-color:transparent; color:white;">
             <form asp-action="Add" asp-controller="Patient" method="post">
                 <div class="mb-3">
                     <label asp-for="@Model.Name" class="form-label">Hasta Adı</label>
@@ -56,7 +56,21 @@
             </form>
         </div>
 
+        </div>
     </div>
 </div>
 
 
+<style>
+    body{
+        
+    }
+
+  
+
+    .card {
+        background-color: rgba(0, 0, 0, 0.158);
+    }
+
+   
+</style>

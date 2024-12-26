@@ -4,6 +4,7 @@ using GeneMap.BLL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeneMap.BLL.Migrations
 {
     [DbContext(typeof(PatientDataContext))]
-    partial class PatientDataContextModelSnapshot : ModelSnapshot
+    [Migration("20241225135909_ılnesadd2")]
+    partial class ılnesadd2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -209,12 +212,7 @@ namespace GeneMap.BLL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PatientRelativeId")
-                        .HasColumnType("int");
-
                     b.HasKey("IlnessId");
-
-                    b.HasIndex("PatientRelativeId");
 
                     b.ToTable("Ilnesses");
                 });
@@ -318,22 +316,9 @@ namespace GeneMap.BLL.Migrations
 
                     b.HasKey("PatientRelativeId");
 
+                    b.HasIndex("IllnessId");
+
                     b.ToTable("PatientRelatives");
-                });
-
-            modelBuilder.Entity("IlnessPatient", b =>
-                {
-                    b.Property<int>("IlnessesIlnessId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PatientsPatientId")
-                        .HasColumnType("int");
-
-                    b.HasKey("IlnessesIlnessId", "PatientsPatientId");
-
-                    b.HasIndex("PatientsPatientId");
-
-                    b.ToTable("IlnessPatient");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
@@ -392,23 +377,16 @@ namespace GeneMap.BLL.Migrations
                     b.Navigation("Patient");
                 });
 
-            modelBuilder.Entity("GeneMap.BLL.Data.Entities.Ilness", b =>
-                {
-                    b.HasOne("GeneMap.BLL.Data.Entities.PatientRelative", null)
-                        .WithMany("Ilness")
-                        .HasForeignKey("PatientRelativeId");
-                });
-
             modelBuilder.Entity("GeneMap.BLL.Data.Entities.PatientIlness", b =>
                 {
                     b.HasOne("GeneMap.BLL.Data.Entities.Ilness", "Ilness")
-                        .WithMany()
+                        .WithMany("Patients")
                         .HasForeignKey("IlnessId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("GeneMap.BLL.Data.Entities.Patient", "Patient")
-                        .WithMany()
+                        .WithMany("Ilnesses")
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -437,30 +415,31 @@ namespace GeneMap.BLL.Migrations
                     b.Navigation("PatientRelative");
                 });
 
-            modelBuilder.Entity("IlnessPatient", b =>
+            modelBuilder.Entity("GeneMap.BLL.Data.Entities.PatientRelative", b =>
                 {
-                    b.HasOne("GeneMap.BLL.Data.Entities.Ilness", null)
+                    b.HasOne("GeneMap.BLL.Data.Entities.Ilness", "Ilness")
                         .WithMany()
-                        .HasForeignKey("IlnessesIlnessId")
+                        .HasForeignKey("IllnessId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GeneMap.BLL.Data.Entities.Patient", null)
-                        .WithMany()
-                        .HasForeignKey("PatientsPatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Ilness");
+                });
+
+            modelBuilder.Entity("GeneMap.BLL.Data.Entities.Ilness", b =>
+                {
+                    b.Navigation("Patients");
                 });
 
             modelBuilder.Entity("GeneMap.BLL.Data.Entities.Patient", b =>
                 {
+                    b.Navigation("Ilnesses");
+
                     b.Navigation("PatientPatientRelative");
                 });
 
             modelBuilder.Entity("GeneMap.BLL.Data.Entities.PatientRelative", b =>
                 {
-                    b.Navigation("Ilness");
-
                     b.Navigation("PatientPatientRelative");
                 });
 #pragma warning restore 612, 618

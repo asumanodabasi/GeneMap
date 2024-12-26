@@ -8,13 +8,13 @@
 <div class="grid">
     <div class="card">
         <div class="card-header">
-            <div class="card-title">Hasta Yakınları Listele</div>
+            <div class="card-title" style="color:white;">Hasta Yakınları Listele</div>
         </div>
         <div class="card-body">
             <table class="table">
                 <thead>
                     <tr>
-                        @Html.Hidden("patientId")
+                        @Html.Hidden("PatientId")
 
                         <th scope="col">Hasta Yakını Adı</th>
                         <th scope="col">Hasta Yakını Soyadı</th>
@@ -41,11 +41,11 @@
                             </td>
                            
                             <td>
-                                @foreach (var ilness in Model.Ilness)
+                                @foreach (var ilness in Model.PatientRelative.Select(x=>x.PatientRelative.Ilness))
                                 {
                                     @if (item.PatientRelative.IllnessId == ilness.IlnessId)
                                     {
-                                        @ilness.IlnessName  @ilness.DiseaseStage
+                                         @ilness.IlnessName  @ilness.DiseaseStage 
                                         break;
                                     }
                                    

@@ -18,12 +18,29 @@ html {
 }
 
 body {
-  margin-bottom: 30px;
+    margin-bottom: 30px;
+    background-image: url('/images/two-genomes-sotry.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 .box {
-    height: 320px;
-    border-radius: 20px;
-    border: 2px solid white;
-    z-index: 1;
+    position: relative;
+    width: 380px;
+
+    border-radius: 8px;
+    background:#1c1c1c;
+
     background-color: rgb(4,75,97);
+    overflow: hidden;
 }
+
+
+    .box form {
+        position: relative;
+        z-index: 2;
+        padding: 20px;
+        
+        flex-direction: column;
+        gap: 20px;
+    }

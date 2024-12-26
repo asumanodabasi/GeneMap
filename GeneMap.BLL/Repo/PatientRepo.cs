@@ -48,9 +48,9 @@ namespace GeneMap.BLL.Repo
         {
             var result = await _patientDataContext.Patients
                 .Include(x => x.PatientPatientRelative)
-                    .ThenInclude(pr => pr.PatientRelative).Include(x=>x.Ilnesses)
+                    .ThenInclude(pr => pr.PatientRelative).ThenInclude(x=>x.Ilness).Include(x=>x.Ilnesses)
                 .FirstOrDefaultAsync(x => x.PatientId == patientId, cancellationToken);
-
+            
             
             if (result == null) return null;
 
@@ -67,16 +67,10 @@ namespace GeneMap.BLL.Repo
                 PatientEndDate = result.PatientEndDate,
                 DiseaseStatus = result.DiseaseStatus,
                 Ilness=result.Ilnesses,
-                PatientRelative = result.PatientPatientRelative.Select(pr => new PatientPatientRelative
-                {
-                    PatientId = pr.PatientId,
-                    PatientRelativeId = pr.PatientRelativeId,
-                    Relation = pr.Relation,
-                    PatientRelative=pr.PatientRelative,
-                    Patient =pr.Patient,
-                }).ToList()
+                PatientRelative = result.PatientPatientRelative,
+    
             };
-
+         
             return patientDto;
         }
 
@@ -108,7 +102,8 @@ namespace GeneMap.BLL.Repo
                 PatientEndDate = result.PatientEndDate,
                 PatientStartDate = result.PatientStartDate,
                 Symptoms = result.Symptoms,
-                PatientId = result.PatientId
+                PatientId = result.PatientId,
+                Ilness=result.Ilnesses
             };
             return  patientDto;
           

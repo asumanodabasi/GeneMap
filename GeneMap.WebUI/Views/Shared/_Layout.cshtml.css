@@ -41,10 +41,6 @@ button.accept-policy {
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-image: url('images/two-genomes-sotry.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
 }
 
 /*.footer {

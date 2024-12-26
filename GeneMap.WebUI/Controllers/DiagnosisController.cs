@@ -20,9 +20,14 @@ namespace GeneMap.WebUI.Controllers
             return View(result);
         }
 
-        public async Task<IActionResult> Add(CancellationToken cancellationToken)
+        public async Task<IActionResult> Add(int patientId,CancellationToken cancellationToken)
         {
-            return PartialView();
+
+            var model = new DiagnosisDto
+            {
+                PatientId = patientId
+            };
+            return PartialView(model);
         }
 
         [HttpPost]
@@ -34,12 +39,12 @@ namespace GeneMap.WebUI.Controllers
                 return View(nameof(Add), diagnosisDto);
             }
             await _diagnosisRepo.Add(diagnosisDto, cancellationToken);
-            return RedirectToAction("Index");
+            return RedirectToAction("PutDiagnosis");
         }
 
-        public async Task<IActionResult> PutDiagnosis(int patinetId,int ilnessId,CancellationToken cancellationToken)
+        public async Task<IActionResult> PutDiagnosis(CancellationToken cancellationToken)
         {
-            ///var result = await _diagnosisRepo.PutDiagnosis(patinetId,ilnessId,cancellationToken);
+            
             return View();
         }
         public async Task<IActionResult> Update(int id, CancellationToken cancellationToken)

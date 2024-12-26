@@ -12,9 +12,10 @@ namespace GeneMap.BLL.Data.Dto
         public int PatientRelativeId { get; set; }
         public int Degree { get; set; }
         public string Name { get; set; }
+        public string Relation { get; set; }
         public string Lastname { get; set; }
         public int IllnessId { get; set; }
-        public Ilness Ilness { get; set; }
+        public ICollection<Ilness> Ilnesses { get; set; }
         public ICollection<PatientPatientRelative> Patients { get; set; } = new List<PatientPatientRelative>();
     }
 }

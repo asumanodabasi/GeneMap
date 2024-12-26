@@ -4,13 +4,14 @@
 <div class="grid">
     <div class="card">
         <div class="card-header">
-            <div class="card-title">Hastaları Listele</div>
+            <div class="card-title" style="color:white;">Hastaları Listele</div>
         </div>
         <div class="card-body">
             <table class="table">
                 <thead>
                     <tr>
                         @Html.Hidden("PatientId")
+                        
                         <th scope="col">Hasta Adı</th>
                         <th scope="col">Hasta Soyadı</th>
                         <th scope="col">TC</th>
@@ -110,3 +111,29 @@
 
     </script>
 }
+<style>
+    body{
+        background-image: url('/images/two-genomes-sotry.jpg');
+        background-size: cover;
+    }
+
+    table {
+        width: 80%;
+        border-collapse: collapse;
+        background-color: transparent;
+    }
+
+    .card {
+        background-color: rgba(0, 0, 0, 0.158);
+    }
+
+    th, td {
+        text-align: center;
+        color: white;
+    }
+
+    th {
+        background-color: rgba(0, 0, 0, 0.6); /* Daha koyu şeffaf arka plan */
+    }
+ 
+</style>

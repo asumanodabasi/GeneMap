@@ -14,7 +14,7 @@ namespace GeneMap.BLL.Data.Entities
         public DateOnly? PatientEndDate { get; set; }
         public bool DiseaseStatus { get; set; }
         public ICollection<Doctor> Doctors { get; set; }=new List<Doctor>();
-        public ICollection<Ilness> Ilnesses { get; set; } =new List<Ilness>();
+        public ICollection<Ilness> Ilnesses { get; set; } = new List<Ilness>();
         public ICollection<PatientPatientRelative> PatientPatientRelative { get; set; } = new List<PatientPatientRelative>();
     }
 }

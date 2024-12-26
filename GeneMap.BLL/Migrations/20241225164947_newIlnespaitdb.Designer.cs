@@ -4,6 +4,7 @@ using GeneMap.BLL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeneMap.BLL.Migrations
 {
     [DbContext(typeof(PatientDataContext))]
-    partial class PatientDataContextModelSnapshot : ModelSnapshot
+    [Migration("20241225164947_newIlnespaitdb")]
+    partial class newIlnespaitdb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -209,12 +212,7 @@ namespace GeneMap.BLL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PatientRelativeId")
-                        .HasColumnType("int");
-
                     b.HasKey("IlnessId");
-
-                    b.HasIndex("PatientRelativeId");
 
                     b.ToTable("Ilnesses");
                 });
@@ -392,13 +390,6 @@ namespace GeneMap.BLL.Migrations
                     b.Navigation("Patient");
                 });
 
-            modelBuilder.Entity("GeneMap.BLL.Data.Entities.Ilness", b =>
-                {
-                    b.HasOne("GeneMap.BLL.Data.Entities.PatientRelative", null)
-                        .WithMany("Ilness")
-                        .HasForeignKey("PatientRelativeId");
-                });
-
             modelBuilder.Entity("GeneMap.BLL.Data.Entities.PatientIlness", b =>
                 {
                     b.HasOne("GeneMap.BLL.Data.Entities.Ilness", "Ilness")
@@ -459,8 +450,6 @@ namespace GeneMap.BLL.Migrations
 
             modelBuilder.Entity("GeneMap.BLL.Data.Entities.PatientRelative", b =>
                 {
-                    b.Navigation("Ilness");
-
                     b.Navigation("PatientPatientRelative");
                 });
 #pragma warning restore 612, 618

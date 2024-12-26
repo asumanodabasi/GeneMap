@@ -6,6 +6,7 @@
 </head>
 <body>
     <h2 style="color:white;">@_language.GetKey("Welcome").Value</h2>
+
     <div class="containerhome">
         <div class="dna">
             <div class="item">
@@ -231,5 +232,106 @@
             </filter>
         </svg>
     </div>
+
+
+    <div ></div>
+
+
 </body>
 </html>
+
+
+<style>
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        overflow-x: hidden;
+       
+    }
+
+    section {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        transition: background 0.5s ease-in-out;
+   
+    }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Arka planı karartır */
+            z-index: 1;
+        }
+
+    h1 {
+        position: relative;
+        z-index: 2;
+        color: white;
+        font-size: 3rem;
+    }
+
+    section.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .section2 {
+        background: url('/images/two-genomes-sotry.jpg') no-repeat center center/cover;
+    }
+
+    .section3 {
+        background: url('/images/card.jpg') no-repeat center center/cover;
+    }
+
+    h1 {
+        color: white;
+        font-size: 3rem;
+        text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    }
+</style>
+
+
+@section scripts {
+    <script>
+        // script.js
+        document.addEventListener("DOMContentLoaded", () => {
+            const sections = document.querySelectorAll("section");
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        document.body.style.backgroundColor = entry.target.dataset.bgColor || "#fff";
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            sections.forEach((section) => {
+                observer.observe(section);
+            });
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, { threshold: 0.7 }); // Görünme oranı %70
+
+    </script>
+
+}
