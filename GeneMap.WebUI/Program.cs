@@ -90,11 +90,11 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.Run();
-
 using (var scope = app.Services.CreateScope())
 {
     var srv = scope.ServiceProvider;
     var context = srv.GetRequiredService<PatientDataContext>();
     context.Database.Migrate();
 }
+app.Run();
+
