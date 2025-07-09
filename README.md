@@ -4,6 +4,8 @@ EN
 
 This project is a web application designed to provide **early diagnosis** by analyzing patients' **past disease data** and **familial genetic history**. Built with ASP.NET Core 8, the project uses **Identity** for user authentication, **RoleManager** for role-based access control, and **Cookie Authentication** for session management.
 
+![Ekran görüntüsü 2024-12-26 213728](https://github.com/user-attachments/assets/0ed77fa0-97a8-41dc-ad3b-8aa8dc067ab0)
+
 ![Ekran görüntüsü 2024-12-26 223307](https://github.com/user-attachments/assets/b399bf97-38f1-4220-8874-1d389c8dda91)
 ![Ekran görüntüsü 2024-12-26 223707](https://github.com/user-attachments/assets/82c2c333-a8aa-4e81-bbc3-756dfeb1fce3)
 ![Ekran görüntüsü 2025-01-03 111329](https://github.com/user-attachments/assets/86a70913-b74a-46c2-9a16-9cbf41967672)
